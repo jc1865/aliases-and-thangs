@@ -1,3 +1,18 @@
-alias x='exit'
+# colors
+alias grep='grep --color=auto'
 alias ls='ls -G'
+
+# directory listing stuff
 alias ll='ls -lAht'
+alias l.='ls -Ad .*'
+
+# greps
+alias hg='history | grep'
+alias lg='ls | grep'
+
+alias hg='history | grep'
+alias x='exit'
+
+
+
+
