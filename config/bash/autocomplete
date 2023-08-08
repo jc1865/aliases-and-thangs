@@ -1,0 +1,2 @@
+complete -F __complete_ssh_host ssh
+complete -F __complete_ssh_host sshr
