@@ -10,9 +10,3 @@ alias l.='ls -Ad .*'
 alias hg='history | grep'
 alias lg='ls | grep'
 
-alias hg='history | grep'
-alias x='exit'
-
-
-
-
