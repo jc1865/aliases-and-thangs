@@ -2,7 +2,7 @@
 This repository includes my standard rc files and aliases that save me typing 
 and sanity.
 
-## Running
+## Setup
 These settings are meant to be applied with Ansible using the setup.yml 
 playbook. You will want to have Ansible installed in your environment. Then, run
 this command:
