@@ -8,11 +8,13 @@
     #
     # Copy these to the home directory, prepending a dot to the existing file or directory name.
     - name: Copy Config Files
-      ansible.builtin.copy:
-        src: "{{ item.root }}/{{ item.path }}"
-        dest: "~/.{{ item.path }}"
-        mode: "{{ '0755' if item.state == 'directory' else '0644' }}"
-        backup: true
+      ansible.posix.synchronize:
+        src: "{{ item.root }}/{{ item.path }}{{ '/' if item.state == 'directory' }}"
+        dest: "~/.{{ item.path }}{{ '/' if item.state == 'directory' }}"
+        archive: false
+        recursive: true
+        checksum: true
+        delete: true
       loop: "{{ lookup('community.general.filetree', 'files/') | rejectattr('path', 'contains', '/') }}"
       loop_control:
         label: "{{ item.path }}"
