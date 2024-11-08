@@ -11,3 +11,4 @@ alias al='vi ~/.bash_profile'
 
 # commands
 alias mx='chmod +x' 
+alias rx='chmod -x'
