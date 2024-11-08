@@ -1,0 +1,17 @@
+---
+
+- name: Configure System Shell Environment
+  connection: local
+  hosts: localhost
+  tasks:
+    # Loop over all files and subdirectories in / but do not recurse -- only look at the top level.
+    # 
+    # Copy these to the home directory, prepending a dot to the existing file or directory name.
+    - name: Copy Config Files
+      ansible.builtin.copy:
+        src: "{{ item.root }}/{{ item.path }}"
+        dest: "~/.{{ item.path }}"
+        backup: true
+      loop: "{{ lookup('community.general.filetree', 'files/') | rejectattr('path', 'contains', '/')}}"
+      loop_control:
+        label: "{{ item.path }}"
