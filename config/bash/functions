@@ -1,30 +1,48 @@
-sshr () {                                                                         
-  ssh root@$@                                                                     
-}                                                                                 
-
-poke () {
-  if ping -W 10 -c 1 $1 &>/dev/null; then 
-    return 0
-  else 
-    return 1 
-  fi
+function sshr() {
+  ssh root@$@
 }
 
-__complete_ssh_host() {
-    local KNOWN_FILE=~/.ssh/known_hosts
-    if [ -r $KNOWN_FILE ] ; then
-        local KNOWN_LIST=`cut -f 1 -d ' ' $KNOWN_FILE | cut -f 1 -d ',' | grep -v '^[0-9[]'`
+PROMPT_COMMAND=__prompt_command
+
+function __prompt_command() {
+    local EXIT="$?"
+    PS1=""
+
+    local RCol='\[\e[0m\]'
+
+    local Red='\[\e[0;31m\]'
+    local Gre='\[\e[0;32m\]'
+    local BYel='\[\e[0;33m\]'
+    local BBlu='\[\e[0;34m\]'
+    local Pur='\[\e[0;35m\]'
+
+    if [ $EXIT != 0 ]; then
+        PS1="${Red}\u@\h \w"
+    else
+        PS1="${Gre}\u${Rcol}@${BBlu}\h ${Pur}\w${BYel}"
     fi
 
-    local CONFIG_FILE=~/.ssh/config
-    if [ -r $CONFIG_FILE ] ; then
-        local CONFIG_LIST=`awk '/^Host [A-Za-z]+/ {print $2}' $CONFIG_FILE`
+    if [ $UID -ne 0 ]; then
+        PS1+="$ ${RCol}"
+    else
+        PS1+="# ${Rcol}"
     fi
-
-    local PARTIAL_WORD="${COMP_WORDS[COMP_CWORD]}";
-
-    COMPREPLY=( $(compgen -W "$KNOWN_LIST$IFS$CONFIG_LIST" -- "$PARTIAL_WORD") )
-
-    return 0
 }
 
+function _complete_ssh_hosts ()
+{
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    comp_ssh_hosts=`cat ~/.ssh/known_hosts | \
+                    cut -f 1 -d ' ' | \
+                    sed -e s/,.*//g | \
+                    grep -v ^# | \
+                    uniq | \
+                    grep -v "\[" ;
+            cat ~/.ssh/config | \
+                    grep "^Host " | \
+                    awk '{print $2}'
+            `
+    COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
+    return 0
+}

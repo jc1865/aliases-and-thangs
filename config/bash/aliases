@@ -1,12 +1,7 @@
-# colors
-alias grep='grep --color=auto'
-alias ls='ls -G'
-
-# directory listing stuff
-alias ll='ls -lAht'
-alias l.='ls -Ad .*'
-
-# greps
-alias hg='history | grep'
-alias lg='ls | grep'
-
+alias ls='ls --color -F'
+alias ll='ls -lh'
+alias lg='ls | grep '
+alias l.='ls -A | grep "^\."'
+alias s='source ~/.bashrc'
+alias k='vi ~/.ssh/known_hosts'
+alias al='vi ~/.bash_profile'

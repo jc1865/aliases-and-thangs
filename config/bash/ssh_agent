@@ -1,0 +1,9 @@
+SSHAF=$HOME/.ssh_agent_env
+[ -f $SSHAF ] && . $SSHAF
+
+# if ssh-agent not really running?
+if [ -n "$SSH_AGENT_PID" ] && ! kill -0 $SSH_AGENT_PID >/dev/null
+then ssh-agent >$SSHAF
+     . $SSHAF
+     ssh-add # add list of more keys here if needed
+fi
