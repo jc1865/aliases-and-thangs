@@ -1,7 +1,13 @@
+# ls preferences
 alias ls='ls --color -F'
 alias ll='ls -lh'
 alias lg='ls | grep '
 alias l.='ls -A | grep "^\."'
+
+# save some keystrokes (yes I use these all the time)
 alias s='source ~/.bashrc'
 alias k='vi ~/.ssh/known_hosts'
 alias al='vi ~/.bash_profile'
+
+# commands
+alias mx='chmod +x' 
