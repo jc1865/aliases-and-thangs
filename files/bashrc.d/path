@@ -1,2 +1,2 @@
-export PATH="${HOME}/bin:${PATH}"
-export PATH="/usr/local/go/bin:${PATH}"
+[[ -d "${HOME}/bin" ]] && export PATH="${HOME}/bin:${PATH}"
+[[ -d /usr/local/go/bin ]] && export PATH="/usr/local/go/bin:${PATH}"

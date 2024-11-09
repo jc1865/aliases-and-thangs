@@ -7,7 +7,7 @@ alias l.='ls -d .*'
 # save some keystrokes (yes I use these all the time)
 alias s='source ~/.bashrc'
 alias k='vi ~/.ssh/known_hosts'
-alias al='vi ~/.bash_profile'
+alias al='vi ~/.bashrc.d/aliases'
 
 # commands
 alias mx='chmod +x' 
