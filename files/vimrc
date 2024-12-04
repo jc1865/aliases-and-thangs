@@ -1,5 +1,5 @@
 syntax on
-set colorcolumn=79
+set colorcolumn=79 hlsearch
 
 filetype plugin indent on
 set expandtab tabstop=2 softtabstop=2 shiftwidth=2
